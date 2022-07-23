@@ -2,6 +2,7 @@ import React from 'react';
 import { RiDoubleQuotesL } from 'react-icons/ri';
 
 import { JokeType } from '../../types/joke';
+import { NotFoundItems } from '../NotFoundItems';
 import * as S from './styles';
 
 interface JokesCardProps {
@@ -14,13 +15,15 @@ const JokesCards: React.FC<JokesCardProps> = ({jokes}) => {
             <S.Count>
                 {jokes.length} itens
             </S.Count>
-            <S.ContainerCards>
-                {jokes.map((joke) => (
-                    <S.Card key={joke.id} href={joke.url} target="_blank">
-                        <RiDoubleQuotesL /> <p>{joke.value}</p>
-                    </S.Card>
-                ))}
-            </S.ContainerCards>
+            {jokes.length > 0 ? 
+                (<S.ContainerCards>
+                    {jokes.map((joke) => (
+                        <S.Card key={joke.id} href={joke.url} target="_blank">
+                            <RiDoubleQuotesL /> <p>{joke.value}</p>
+                        </S.Card>
+                    ))}
+                </S.ContainerCards>)
+            : <NotFoundItems /> }
         </>
     );
 };

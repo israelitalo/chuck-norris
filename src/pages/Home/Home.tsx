@@ -1,15 +1,19 @@
 import React, { useCallback, useState } from 'react';
-import JokesCards from '../../components/JokesCards/JokesCards';
 
+import JokesCards from '../../components/JokesCards/JokesCards';
+import { SpinnerLoading } from '../../components/SpinnerLoading';
 import { Title } from '../../components/Title';
 import { api } from '../../service/api';
 import { JokeServiceType, JokeType } from '../../types/joke';
 import * as S from './styles';
 
+import NorrisGif from '../../assets/gifs/norris.gif';
+
 const Home: React.FC = () => {
 
     const [search, setSearch] = useState<string>('');
     const [loadingSearch, setLoadingSearch] = useState<boolean>(false);
+    const [isResult, setIsResult] = useState<boolean>(false);
     const [jokes, setJokes] = useState<JokeType[]>([]);
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = useCallback((event) => {
@@ -22,7 +26,10 @@ const Home: React.FC = () => {
         .then(response => {
             setJokes(response.data.result);
         })
-        .finally(() => setLoadingSearch(false));
+        .finally(() => {
+            setLoadingSearch(false);
+            setIsResult(true);
+        });
     },[search])
 
     return (
@@ -38,7 +45,13 @@ const Home: React.FC = () => {
                     <button disabled={loadingSearch} type='submit'>{loadingSearch ? 'hold up' : 'search'}</button>
                 </form>
             </S.ContainerForm>
-            <JokesCards jokes={jokes} />
+
+            <img src={NorrisGif} height="100%" width="100%" aria-label='norris-gif' />
+
+            { loadingSearch 
+                ? <SpinnerLoading /> 
+                : isResult && <JokesCards jokes={jokes} />
+            }
         </S.Container>
     );
 };
