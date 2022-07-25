@@ -10,7 +10,7 @@ const JokesCards: React.FC = () => {
     const { jokes } = useSearchContext();
     
     return (
-        <>
+        <section data-testid="joke-component">
             <S.Count>
                 {jokes.length} itens
             </S.Count>
@@ -23,7 +23,7 @@ const JokesCards: React.FC = () => {
                     ))}
                 </S.ContainerCards>)
             : <NotFoundItems /> }
-        </>
+        </section>
     );
 };
 

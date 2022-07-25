@@ -3,7 +3,7 @@ import * as S from './styles';
 
 const Title: React.FC = () => {
     return (
-        <S.Title>
+        <S.Title data-testid="title-application">
             <h1>
                 Search something about 
                 <span>Chuck Norris</span>

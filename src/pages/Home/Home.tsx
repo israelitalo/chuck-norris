@@ -34,8 +34,15 @@ const Home: React.FC = () => {
                         value={search}
                         onChange={({ target }) => setSearch(target.value)}
                         placeholder="search here"
+                        data-testid="input-search"
                     />
-                    <button disabled={loadingSearch} type='submit'>{loadingSearch ? 'hold up' : 'search'}</button>
+                    <button 
+                        disabled={loadingSearch} 
+                        type='submit'
+                        data-testid="button-search"
+                    >
+                        {loadingSearch ? 'hold up' : 'search'}
+                    </button>
                 </form>
                 {hasError && <span>{hasError}</span>}
             </S.ContainerForm>

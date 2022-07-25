@@ -6,7 +6,11 @@ const AppRouters = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/"  element={<SearchContextProvider><Home /></SearchContextProvider>} />
+                <Route path="/"  element={
+                    <SearchContextProvider>
+                        <Home />
+                    </SearchContextProvider>} 
+                />
             </Routes>
         </BrowserRouter>
     )

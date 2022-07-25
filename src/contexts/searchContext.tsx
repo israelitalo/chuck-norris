@@ -11,7 +11,7 @@ type SearchContextType = {
     getJokes: (search: string) => void;
 };
 
-const SearchContext = React.createContext({} as SearchContextType);
+export const SearchContext = React.createContext({} as SearchContextType);
 
 export const SearchContextProvider = ({ children }: PropsWithChildren) => {
 
