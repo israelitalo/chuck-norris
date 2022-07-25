@@ -34,7 +34,14 @@ const Home: React.FC = () => {
 
     return (
         <S.Container>
-            <Title />
+            <S.ContainerTitle>
+                <div>
+                    <Title />
+                </div>
+                <div>
+                    <S.ImageNorris src={NorrisGif} height="150" width="50%" aria-label='norris-gif' />
+                </div>
+            </S.ContainerTitle>
             <S.ContainerForm>
                 <form onSubmit={handleSubmit}>
                     <input 
@@ -46,7 +53,6 @@ const Home: React.FC = () => {
                 </form>
             </S.ContainerForm>
 
-            <img src={NorrisGif} height="100%" width="100%" aria-label='norris-gif' />
 
             { loadingSearch 
                 ? <SpinnerLoading /> 

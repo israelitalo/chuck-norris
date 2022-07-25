@@ -11,6 +11,33 @@ export const Container = styled.main`
     max-width: 1200px;
 `;
 
+export const ContainerTitle = styled.section`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+        display: flex;
+        flex: 1;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    > div {
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+        align-items: center;
+    }
+`;
+
+export const ImageNorris = styled.img`
+    height: 150px;
+    width: 50%;
+    border-radius: .2rem;
+`;
+
 export const ContainerForm = styled.section`
     margin-top: 2rem;
     input {
