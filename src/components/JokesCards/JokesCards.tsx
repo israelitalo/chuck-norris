@@ -1,15 +1,14 @@
 import React from 'react';
 import { RiDoubleQuotesL } from 'react-icons/ri';
 
-import { JokeType } from '../../types/joke';
+import { useSearchContext } from '../../contexts/searchContext';
 import { NotFoundItems } from '../NotFoundItems';
 import * as S from './styles';
 
-interface JokesCardProps {
-    jokes: JokeType[];
-}
+const JokesCards: React.FC = () => {
 
-const JokesCards: React.FC<JokesCardProps> = ({jokes}) => {
+    const { jokes } = useSearchContext();
+    
     return (
         <>
             <S.Count>
