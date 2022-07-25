@@ -7,7 +7,7 @@ const NotFoundItems: React.FC = () => {
     return (
         <S.Container>
             <h2>Not found items</h2>
-            <MdOutlineSearchOff size={60} color="#5333ed" />
+            <MdOutlineSearchOff size={60} color="#2151a1" />
         </S.Container>
     );
 };

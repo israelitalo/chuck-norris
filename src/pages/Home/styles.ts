@@ -12,10 +12,10 @@ export const Container = styled.main`
 `;
 
 export const ContainerTitle = styled.section`
+    display: grid;
+    grid-gap: 15px;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    grid-template-columns: repeat(2, 1fr);
 
     div {
         display: flex;
@@ -30,16 +30,31 @@ export const ContainerTitle = styled.section`
         justify-content: flex-end;
         align-items: center;
     }
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        div {
+            justify-content: center;
+        }
+    }
 `;
 
 export const ImageNorris = styled.img`
     height: 150px;
     width: 50%;
     border-radius: .2rem;
+    @media (max-width: 425px) {
+        width: 70%;
+    }
 `;
 
 export const ContainerForm = styled.section`
     margin-top: 2rem;
+    form {
+        display: flex;
+        align-items: center;
+        margin-bottom: .3rem;
+    }
     input {
         height: 30px;
         padding: .5rem;
@@ -60,7 +75,12 @@ export const ContainerForm = styled.section`
         border-radius: .2rem;
         transition: .1s;
         &:hover {
-            background-color: ${shade(0.2, '#5333ed')};
+            background-color: ${shade(0.2, '#2151a1')};
         }
+    }
+    span {
+        color: var(--red);
+        font-weight: 400;
+        font-size: 1rem;
     }
 `;

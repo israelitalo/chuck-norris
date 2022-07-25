@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
         --background: #E5E5E5;
         --red: #F53A0B;
         --secondary: #55e2da;
-        --primary: #5333ed;
+        --primary: #2151a1;
         --black: #151516;
         --gray-700: #666173;
         --gray-500: #C9C5D4;

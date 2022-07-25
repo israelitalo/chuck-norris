@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
+import NorrisGif from '../../assets/gifs/norris.gif';
 import JokesCards from '../../components/JokesCards/JokesCards';
 import { SpinnerLoading } from '../../components/SpinnerLoading';
 import { Title } from '../../components/Title';
@@ -7,13 +8,12 @@ import { api } from '../../service/api';
 import { JokeServiceType, JokeType } from '../../types/joke';
 import * as S from './styles';
 
-import NorrisGif from '../../assets/gifs/norris.gif';
-
 const Home: React.FC = () => {
 
     const [search, setSearch] = useState<string>('');
     const [loadingSearch, setLoadingSearch] = useState<boolean>(false);
     const [isResult, setIsResult] = useState<boolean>(false);
+    const [hasError, setHasError] = useState<boolean | string>(false);
     const [jokes, setJokes] = useState<JokeType[]>([]);
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = useCallback((event) => {
@@ -25,7 +25,9 @@ const Home: React.FC = () => {
         api.get<JokeServiceType>('/search', { params })
         .then(response => {
             setJokes(response.data.result);
+            setHasError(false);
         })
+        .catch((error) => setHasError(error.response?.data?.message || 'erro inesperado'))
         .finally(() => {
             setLoadingSearch(false);
             setIsResult(true);
@@ -39,7 +41,7 @@ const Home: React.FC = () => {
                     <Title />
                 </div>
                 <div>
-                    <S.ImageNorris src={NorrisGif} height="150" width="50%" aria-label='norris-gif' />
+                    <S.ImageNorris src={NorrisGif} aria-label='norris-gif' />
                 </div>
             </S.ContainerTitle>
             <S.ContainerForm>
@@ -51,9 +53,8 @@ const Home: React.FC = () => {
                     />
                     <button disabled={loadingSearch} type='submit'>{loadingSearch ? 'hold up' : 'search'}</button>
                 </form>
+                {hasError && <span>{hasError}</span>}
             </S.ContainerForm>
-
-
             { loadingSearch 
                 ? <SpinnerLoading /> 
                 : isResult && <JokesCards jokes={jokes} />
