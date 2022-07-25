@@ -1,13 +1,14 @@
-import { AppRouters } from './routes';
-import { GlobalStyle } from './styles/global';
+import React from "react";
+import { AppRouters } from "./routes";
+import { GlobalStyle } from "./styles/global";
 
-function App() {
+const App = () => {
   return (
     <>
       <AppRouters />
       <GlobalStyle />
     </>
   );
-}
+};
 
 export default App;
