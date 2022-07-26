@@ -13,6 +13,9 @@ Integration with chucknorris.io api [https://api.chucknorris.io/](https://api.ch
 
 In the project directory, you can run:
 
+### `npm install`
+Install all dependencies of project
+
 ### `npm start`
 
 Runs the app in the development mode.\
