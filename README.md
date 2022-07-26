@@ -6,6 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Integration with chucknorris.io api [https://api.chucknorris.io/](https://api.chucknorris.io/).
 
+### `URL Application`
+[https://chuck-norris-ddqxgvy5f-israelitalo.vercel.app](https://chuck-norris-ddqxgvy5f-israelitalo.vercel.app)
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -20,12 +23,9 @@ You will also see any lint errors in the console.
 
 ### `npm test`
 
+Nexted press 'a'
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run lint`
-
-To fix any problems encountered by the format.
 
 ### `Home Page`
 
