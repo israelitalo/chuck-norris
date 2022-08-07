@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import NorrisGif from "../../assets/gifs/norris.gif";
 import JokesCards from "../../components/JokesCards/JokesCards";
@@ -6,19 +6,39 @@ import { SpinnerLoading } from "../../components/SpinnerLoading";
 import { Title } from "../../components/Title";
 import { useSearchContext } from "../../contexts/searchContext";
 import * as S from "./styles";
+import { parse } from 'query-string';
+import { useLocation } from 'react-router-dom';
 
 const Home: React.FC = () => {
   const { loadingSearch, hasError, isResult, getJokes } = useSearchContext();
 
-  const [search, setSearch] = useState<string>("");
+  const location = useLocation();
+
+  const searchParsed = useMemo(() => {
+    const _searchParsed = parse(location.search);
+    return _searchParsed['search']?.toString() || '';
+  },[location]);
+
+  const [searchInput, setSearchInput] = useState<string>(searchParsed);
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = useCallback(
     (event) => {
       event.preventDefault();
-      getJokes(search);
+      searchInput && getJokes(searchInput);
     },
-    [getJokes, search]
+    [getJokes, searchInput]
   );
+
+  useEffect(() => {
+    if(searchParsed && searchParsed !== searchInput){
+      getJokes(searchParsed);
+      setSearchInput(searchParsed);
+    }
+    if(!searchParsed){
+      setSearchInput('');
+      getJokes('');
+    }
+  },[searchParsed]);
 
   return (
     <S.Container>
@@ -33,8 +53,8 @@ const Home: React.FC = () => {
       <S.ContainerForm>
         <form onSubmit={handleSubmit}>
           <input
-            value={search}
-            onChange={({ target }) => setSearch(target.value)}
+            value={searchInput}
+            onChange={({ target }) => setSearchInput(target.value)}
             placeholder="search here"
             data-testid="input-search"
           />
