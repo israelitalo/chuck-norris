@@ -4,7 +4,6 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { api } from "../service/api";
 import { JokeServiceType, JokeType } from "../types/joke";
@@ -20,8 +19,6 @@ type SearchContextType = {
 export const SearchContext = React.createContext({} as SearchContextType);
 
 export const SearchContextProvider = ({ children }: PropsWithChildren) => {
-  const navigate = useNavigate();
-
   const [loadingSearch, setLoadingSearch] = useState<boolean>(false);
   const [isResult, setIsResult] = useState<boolean>(false);
   const [hasError, setHasError] = useState<boolean | string>(false);
@@ -45,7 +42,6 @@ export const SearchContextProvider = ({ children }: PropsWithChildren) => {
       .then((response) => {
         setJokes(response.data.result);
         setHasError(false);
-        navigate(`?search=${search}`)
       })
       .catch((error) => {
         setHasError(error.response?.data?.message || "erro inesperado");

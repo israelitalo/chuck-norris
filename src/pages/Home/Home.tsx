@@ -6,39 +6,40 @@ import { SpinnerLoading } from "../../components/SpinnerLoading";
 import { Title } from "../../components/Title";
 import { useSearchContext } from "../../contexts/searchContext";
 import * as S from "./styles";
-import { parse } from 'query-string';
-import { useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 const Home: React.FC = () => {
   const { loadingSearch, hasError, isResult, getJokes } = useSearchContext();
 
-  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const searchParsed = useMemo(() => {
-    const _searchParsed = parse(location.search);
-    return _searchParsed['search']?.toString() || '';
-  },[location]);
-
-  const [searchInput, setSearchInput] = useState<string>(searchParsed);
+  const [searchInput, setSearchInput] = useState<string>('');
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = useCallback(
     (event) => {
       event.preventDefault();
-      searchInput && getJokes(searchInput);
+      if(searchInput) {
+        getJokes(searchInput);
+        setSearchParams({ search: searchInput});
+      } 
     },
     [getJokes, searchInput]
   );
 
   useEffect(() => {
-    if(searchParsed && searchParsed !== searchInput){
-      getJokes(searchParsed);
-      setSearchInput(searchParsed);
+    if(searchParams.get('search') && searchInput !== searchParams.get('search')){
+      setSearchInput(searchParams.get('search') || '');
+      getJokes(searchParams.get('search') || '');
+      return;
     }
-    if(!searchParsed){
+    if(!searchParams.get('search')){
       setSearchInput('');
       getJokes('');
+      setSearchParams({
+        search: ''
+      });
     }
-  },[searchParsed]);
+  },[searchParams]);
 
   return (
     <S.Container>
