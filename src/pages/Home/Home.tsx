@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import NorrisGif from "../../assets/gifs/norris.gif";
 import JokesCards from "../../components/JokesCards/JokesCards";
@@ -9,7 +9,7 @@ import * as S from "./styles";
 import { useSearchParams } from 'react-router-dom';
 
 const Home: React.FC = () => {
-  const { loadingSearch, hasError, isResult, getJokes } = useSearchContext();
+  const { loadingSearch, hasError, setHasError, isResult, getJokes } = useSearchContext();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -18,10 +18,12 @@ const Home: React.FC = () => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = useCallback(
     (event) => {
       event.preventDefault();
-      if(searchInput) {
-        getJokes(searchInput);
-        setSearchParams({ search: searchInput});
-      } 
+      if(searchInput?.length < 3){
+        setHasError('Input min 3 caracters');
+        return;
+      }
+      getJokes(searchInput);
+      setSearchParams({ search: searchInput});
     },
     [getJokes, searchInput]
   );
@@ -67,7 +69,7 @@ const Home: React.FC = () => {
             {loadingSearch ? "hold up" : "search"}
           </button>
         </form>
-        {hasError && <span>{hasError}</span>}
+        {hasError && <span data-testid="span-error-message">{hasError}</span>}
       </S.ContainerForm>
       {loadingSearch ? <SpinnerLoading /> : isResult && <JokesCards />}
     </S.Container>

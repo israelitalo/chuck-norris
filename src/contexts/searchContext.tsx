@@ -3,6 +3,7 @@ import React, {
   useCallback,
   useMemo,
   useState,
+  Dispatch
 } from "react";
 
 import { api } from "../service/api";
@@ -11,6 +12,7 @@ import { JokeServiceType, JokeType } from "../types/joke";
 type SearchContextType = {
   loadingSearch: boolean;
   hasError: string | boolean;
+  setHasError: Dispatch<string | boolean>;
   jokes: JokeType[];
   isResult: boolean;
   getJokes: (search: string) => void;
@@ -60,8 +62,9 @@ export const SearchContextProvider = ({ children }: PropsWithChildren) => {
       jokes,
       loadingSearch,
       getJokes,
+      setHasError
     };
-  }, [isResult, hasError, jokes, loadingSearch, getJokes]);
+  }, [isResult, hasError, setHasError, jokes, loadingSearch, getJokes]);
 
   return (
     <SearchContext.Provider value={valuesProvider}>
