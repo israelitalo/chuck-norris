@@ -7,7 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Integration with chucknorris.io api [https://api.chucknorris.io/](https://api.chucknorris.io/).
 
 ### `URL Application`
-[https://chuck-norris-ddqxgvy5f-israelitalo.vercel.app](https://chuck-norris-ddqxgvy5f-israelitalo.vercel.app)
+[chuck-norris-eight.vercel.app](https://chuck-norris-eight.vercel.app)
 
 ## Available Scripts
 
